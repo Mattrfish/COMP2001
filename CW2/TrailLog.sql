@@ -1,0 +1,16 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [CW2].[TrailLog](
+	[LogID] [int] IDENTITY(1,1) NOT NULL,
+	[TrailID] [int] NOT NULL,
+	[TrailName] [varchar](50) NOT NULL,
+	[UserID] [int] NOT NULL,
+    [Timestamp] [datetime] NOT NULL DEFAULT (GETDATE()),
+	CONSTRAINT PK_TrailLog PRIMARY KEY CLUSTERED ([LogID] ASC),
+    CONSTRAINT FK_TrailLog_Trail FOREIGN KEY ([TrailID]) REFERENCES [CW2].[Trail] ([TrailID]),
+    CONSTRAINT FK_TrailLog_User FOREIGN KEY ([UserID]) REFERENCES [CW2].[User] ([UserID])
+) ON [PRIMARY]
+GO
+

@@ -30,3 +30,4 @@ typing_extensions==4.8.0
 urllib3==2.0.6
 Werkzeug==2.2.2
 pytz
+pyodbc

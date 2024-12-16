@@ -1,0 +1,19 @@
+#swagger.yml
+
+openapi: 3.0.0
+info:
+    title: "RP Flask REST API"
+    description: "A Trail Microservice API"
+    version: "1.0.0"
+servers:
+    - url: "/api"
+paths:
+    /users:
+        get:
+            operationId: "users.read_all"
+            tags:
+                - "Users"
+            summary: "Read the list of users"
+            responses:
+                "200":
+                    description: "Sucessfully read user list"
