@@ -9,16 +9,19 @@
 <body>
     <h1>Trail Information</h1>
 
-    {% for trail in trails %}
+    
     <h2>{{ trail.TrailName }}</h2>
     <ul>
+	{% for trail in trails %}
+	<li><strong>Trail Name: </strong> {{ trail.TrailName }}</li>
         <li><strong>Location:</strong> {{ trail.Location }}</li>
         <li><strong>Difficulty:</strong> {{ trail.Difficulty }}</li>
         <li><strong>Length:</strong> {{ trail.Length }} km</li>
         <li><strong>Elevation Gain:</strong> {{ trail.ElevationGain }} meters</li>
         <li><strong>Route Type:</strong> {{ trail.RouteType }}</li>
         <li><strong>Description:</strong> {{ trail.TrailDescription }}</li>
+	{% endfor %}
     </ul>
-    {% endfor %}
+    
 </body>
 </html>

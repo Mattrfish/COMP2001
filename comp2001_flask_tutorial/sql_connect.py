@@ -6,7 +6,7 @@ server = 'DIST-6-505.uopnet.plymouth.ac.uk'
 database = 'COMP2001_MFish'
 username = 'MFish'
 password = 'UjkN272*'
-driver =  '{ODBC Driver 18 for SQL Server}'
+driver =  '{ODBC Driver 17 for SQL Server}'
 
 #conenction details
 conn_str = (

@@ -155,6 +155,7 @@ paths:
         content:
           application/json:
             schema:
+              x-body-name: "trail"
               $ref: "#/components/schemas/Trail"
       responses:
         "201":
@@ -182,6 +183,7 @@ paths:
         content:
           application/json:
             schema:
+              x-body-name: "trail"
               $ref: "#/components/schemas/Trail"
       responses:
         "200":
