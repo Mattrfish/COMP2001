@@ -1,5 +1,3 @@
-<!-- templates/home.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,19 +7,62 @@
 <body>
     <h1>Trail Information</h1>
 
-    
-    <h2>{{ trail.TrailName }}</h2>
     <ul>
-	{% for trail in trails %}
-	<li><strong>Trail Name: </strong> {{ trail.TrailName }}</li>
-        <li><strong>Location:</strong> {{ trail.Location }}</li>
-        <li><strong>Difficulty:</strong> {{ trail.Difficulty }}</li>
-        <li><strong>Length:</strong> {{ trail.Length }} km</li>
-        <li><strong>Elevation Gain:</strong> {{ trail.ElevationGain }} meters</li>
-        <li><strong>Route Type:</strong> {{ trail.RouteType }}</li>
-        <li><strong>Description:</strong> {{ trail.TrailDescription }}</li>
-	{% endfor %}
+        {% for trail in trails %}
+            <li>
+                <h2>{{ trail.TrailName }}</h2>
+                <p><strong>Trail Summary:</strong> {{ trail.TrailSummary }}</p>
+                <p><strong>Trail Description:</strong> {{ trail.TrailDescription }}</p>
+                <p><strong>Difficulty:</strong> {{ trail.Difficulty }}</p>
+                <p><strong>Location:</strong> {{ trail.Location }}</p>
+                <p><strong>Length:</strong> {{ trail.Length }} km</p>
+                <p><strong>Elevation Gain:</strong> {{ trail.ElevationGain }} meters</p>
+                <p><strong>Route Type:</strong> {{ trail.RouteType }}</p>
+                <p><strong>Owner ID:</strong> {{ trail.OwnerID }}</p>
+
+                <!-- Points 1 to 5 -->
+                <h3>Trail Points:</h3>
+                <ul>
+                    {% if trail.Pt1_Lat and trail.Pt1_Long %}
+                        <li>
+                            <p><strong>Point 1:</strong> {{ trail.Pt1_Desc }}</p>
+                            <p><strong>Latitude:</strong> {{ trail.Pt1_Lat }}</p>
+                            <p><strong>Longitude:</strong> {{ trail.Pt1_Long }}</p>
+                        </li>
+                    {% endif %}
+                    {% if trail.Pt2_Lat and trail.Pt2_Long %}
+                        <li>
+                            <p><strong>Point 2:</strong> {{ trail.Pt2_Desc }}</p>
+                            <p><strong>Latitude:</strong> {{ trail.Pt2_Lat }}</p>
+                            <p><strong>Longitude:</strong> {{ trail.Pt2_Long }}</p>
+                        </li>
+                    {% endif %}
+                    {% if trail.Pt3_Lat and trail.Pt3_Long %}
+                        <li>
+                            <p><strong>Point 3:</strong> {{ trail.Pt3_Desc }}</p>
+                            <p><strong>Latitude:</strong> {{ trail.Pt3_Lat }}</p>
+                            <p><strong>Longitude:</strong> {{ trail.Pt3_Long }}</p>
+                        </li>
+                    {% endif %}
+                    {% if trail.Pt4_Lat and trail.Pt4_Long %}
+                        <li>
+                            <p><strong>Point 4:</strong> {{ trail.Pt4_Desc }}</p>
+                            <p><strong>Latitude:</strong> {{ trail.Pt4_Lat }}</p>
+                            <p><strong>Longitude:</strong> {{ trail.Pt4_Long }}</p>
+                        </li>
+                    {% endif %}
+                    {% if trail.Pt5_Lat and trail.Pt5_Long %}
+                        <li>
+                            <p><strong>Point 5:</strong> {{ trail.Pt5_Desc }}</p>
+                            <p><strong>Latitude:</strong> {{ trail.Pt5_Lat }}</p>
+                            <p><strong>Longitude:</strong> {{ trail.Pt5_Long }}</p>
+                        </li>
+                    {% endif %}
+                </ul>
+            </li>
+        {% else %}
+            <p>No trails found.</p>
+        {% endfor %}
     </ul>
-    
 </body>
 </html>
