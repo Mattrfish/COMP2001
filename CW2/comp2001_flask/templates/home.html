@@ -3,12 +3,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <title> RP Flask REST API</title>
+    <meta charset="UTF-8">
+    <title>RP Flask REST API - Trails</title>
 </head>
 <body>
-    <h1>
-	Hello, World!
-    </h1>
+    <h1>Trail Information</h1>
+
+    {% for trail in trails %}
+    <h2>{{ trail.TrailName }}</h2>
+    <ul>
+        <li><strong>Location:</strong> {{ trail.Location }}</li>
+        <li><strong>Difficulty:</strong> {{ trail.Difficulty }}</li>
+        <li><strong>Length:</strong> {{ trail.Length }} km</li>
+        <li><strong>Elevation Gain:</strong> {{ trail.ElevationGain }} meters</li>
+        <li><strong>Route Type:</strong> {{ trail.RouteType }}</li>
+        <li><strong>Description:</strong> {{ trail.TrailDescription }}</li>
+    </ul>
+    {% endfor %}
 </body>
-</hmtl>
+</html>

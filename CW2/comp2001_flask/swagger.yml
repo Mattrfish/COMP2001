@@ -1,19 +1,198 @@
-#swagger.yml
-
 openapi: 3.0.0
 info:
-    title: "RP Flask REST API"
-    description: "A Trail Microservice API"
-    version: "1.0.0"
+  title: "RP Flask REST API"
+  description: "A Trail Microservice API"
+  version: "1.0.0"
 servers:
-    - url: "/api"
+  - url: "/api"
+
+components:
+  schemas:
+    Trail:
+      type: "object"
+      required:
+        - TrailId
+        - TrailName
+        - TrailSummary
+        - TrailDescription
+        - Difficulty
+        - Location
+        - Length
+        - ElevationGain
+        - RouteType
+        - OwnerID
+        - Pt1_Lat
+        - Pt1_Long
+        - Pt1_Desc
+        - Pt2_Lat
+        - Pt2_Long
+        - Pt2_Desc
+        - Pt3_Lat
+        - Pt3_Long
+        - Pt3_Desc
+        - Pt4_Lat
+        - Pt4_Long
+        - Pt4_Desc
+        - Pt5_Lat
+        - Pt5_Long
+        - Pt5_Desc
+      properties:
+        TrailId:
+          type: "integer"
+          description: "Unique identifier for the trail."
+        TrailName:
+          type: "string"
+          description: "The name of the trail."
+        TrailSummary:
+          type: "string"
+          description: "A brief summary of the trail."
+        TrailDescription:
+          type: "string"
+          description: "Detailed description of the trail."
+        Difficulty:
+          type: "string"
+          description: "Difficulty level of the trail (e.g., Easy, Moderate, Hard)."
+        Location:
+          type: "string"
+          description: "Location of the trail (e.g., Sunset Park, Riverfront Park)."
+        Length:
+          type: "number"
+          format: "float"
+          description: "Length of the trail in kilometers."
+        ElevationGain:
+          type: "number"
+          format: "float"
+          description: "Total elevation gain in meters."
+        RouteType:
+          type: "string"
+          description: "Route type of the trail (e.g., Loop, Out and Back)."
+        OwnerID:
+          type: "integer"
+          description: "ID of the trail owner."
+        Pt1_Lat:
+          type: "number"
+          format: "float"
+          description: "Latitude of the first point of the trail."
+        Pt1_Long:
+          type: "number"
+          format: "float"
+          description: "Longitude of the first point of the trail."
+        Pt1_Desc:
+          type: "string"
+          description: "Description of the first point of the trail."
+        Pt2_Lat:
+          type: "number"
+          format: "float"
+          description: "Latitude of the second point of the trail."
+        Pt2_Long:
+          type: "number"
+          format: "float"
+          description: "Longitude of the second point of the trail."
+        Pt2_Desc:
+          type: "string"
+          description: "Description of the second point of the trail."
+        Pt3_Lat:
+          type: "number"
+          format: "float"
+          description: "Latitude of the third point of the trail."
+        Pt3_Long:
+          type: "number"
+          format: "float"
+          description: "Longitude of the third point of the trail."
+        Pt3_Desc:
+          type: "string"
+          description: "Description of the third point of the trail."
+        Pt4_Lat:
+          type: "number"
+          format: "float"
+          description: "Latitude of the fourth point of the trail."
+        Pt4_Long:
+          type: "number"
+          format: "float"
+          description: "Longitude of the fourth point of the trail."
+        Pt4_Desc:
+          type: "string"
+          description: "Description of the fourth point of the trail."
+        Pt5_Lat:
+          type: "number"
+          format: "float"
+          description: "Latitude of the fifth point of the trail."
+        Pt5_Long:
+          type: "number"
+          format: "float"
+          description: "Longitude of the fifth point of the trail."
+        Pt5_Desc:
+          type: "string"
+          description: "Description of the fifth point of the trail."
+
+  parameters:
+    TrailId:
+      name: "TrailId"
+      description: "ID of the trail to get"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+
 paths:
-    /users:
-        get:
-            operationId: "users.read_all"
-            tags:
-                - "Users"
-            summary: "Read the list of users"
-            responses:
-                "200":
-                    description: "Sucessfully read user list"
+  /trails:
+    get:
+      operationId: "trails.read_all"
+      tags:
+        - "Trails"
+      summary: "Read the list of trails"
+      responses:
+        "200":
+          description: "Successfully read trail list"
+    post:
+      operationId: "trails.create"
+      tags:
+        - "Trails"
+      summary: "Create a Trail"
+      requestBody:
+        description: "Trail to create"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trail"
+      responses:
+        "201":
+          description: "Successfully created Trail"
+  
+  /trails/{TrailId}:
+    get:
+      operationId: "trails.read_one"
+      tags:
+        - "Trails"
+      summary: "Read one Trail"
+      parameters:
+        - $ref: "#/components/parameters/TrailId"
+      responses:
+        "200":
+          description: "Successfully read Trail"
+    put: 
+      operationId: "trails.update"
+      tags:
+        - "Trails"
+      summary: "Update a trail"
+      parameters:
+        - $ref: "#/components/parameters/TrailId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trail"
+      responses:
+        "200":
+          description: "Successfully updated Trail"
+    delete:
+      operationId: "trails.delete"
+      tags:
+        - "Trails"
+      summary: "Delete a trail"
+      parameters: 
+        - $ref: "#/components/parameters/TrailId"
+      responses:
+        "204":
+          description: "Successfully deleted a Trail"
