@@ -20,44 +20,15 @@
                 <p><strong>Route Type:</strong> {{ trail.RouteType }}</p>
                 <p><strong>Owner ID:</strong> {{ trail.OwnerID }}</p>
 
-                <!-- Points 1 to 5 -->
-                <h3>Trail Points:</h3>
+                <!-- Trail Features -->
+                <h3>Features:</h3>
                 <ul>
-                    {% if trail.Pt1_Lat and trail.Pt1_Long %}
+                    {% for feature in trail.trail_features %}
                         <li>
-                            <p><strong>Point 1:</strong> {{ trail.Pt1_Desc }}</p>
-                            <p><strong>Latitude:</strong> {{ trail.Pt1_Lat }}</p>
-                            <p><strong>Longitude:</strong> {{ trail.Pt1_Long }}</p>
+                            <p><strong>Feature ID:</strong> {{ feature.FeaturesId }}</p>
+                            <p><strong>Feature Name:</strong> {{ feature.feature.Feature }}</p>
                         </li>
-                    {% endif %}
-                    {% if trail.Pt2_Lat and trail.Pt2_Long %}
-                        <li>
-                            <p><strong>Point 2:</strong> {{ trail.Pt2_Desc }}</p>
-                            <p><strong>Latitude:</strong> {{ trail.Pt2_Lat }}</p>
-                            <p><strong>Longitude:</strong> {{ trail.Pt2_Long }}</p>
-                        </li>
-                    {% endif %}
-                    {% if trail.Pt3_Lat and trail.Pt3_Long %}
-                        <li>
-                            <p><strong>Point 3:</strong> {{ trail.Pt3_Desc }}</p>
-                            <p><strong>Latitude:</strong> {{ trail.Pt3_Lat }}</p>
-                            <p><strong>Longitude:</strong> {{ trail.Pt3_Long }}</p>
-                        </li>
-                    {% endif %}
-                    {% if trail.Pt4_Lat and trail.Pt4_Long %}
-                        <li>
-                            <p><strong>Point 4:</strong> {{ trail.Pt4_Desc }}</p>
-                            <p><strong>Latitude:</strong> {{ trail.Pt4_Lat }}</p>
-                            <p><strong>Longitude:</strong> {{ trail.Pt4_Long }}</p>
-                        </li>
-                    {% endif %}
-                    {% if trail.Pt5_Lat and trail.Pt5_Long %}
-                        <li>
-                            <p><strong>Point 5:</strong> {{ trail.Pt5_Desc }}</p>
-                            <p><strong>Latitude:</strong> {{ trail.Pt5_Lat }}</p>
-                            <p><strong>Longitude:</strong> {{ trail.Pt5_Long }}</p>
-                        </li>
-                    {% endif %}
+                    {% endfor %}
                 </ul>
             </li>
         {% else %}

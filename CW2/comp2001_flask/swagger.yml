@@ -125,6 +125,34 @@ components:
           type: "string"
           description: "Description of the fifth point of the trail."
 
+    Features:
+      type: "object"
+      required:
+        - Feature
+      properties: 
+        FeaturesId:
+          type: "integer"
+          description: "Unique identifier for features"
+          readOnly: true 
+        Feature:
+          type: "string"
+          description: "Feature of a trail"
+
+    TrailFeature:
+      type: "object"
+      required:
+        - Trail Features
+      properties:
+        TrailId: 
+          type: "integer"
+          description: "Unique identifier for trail"
+        FeaturesId:
+          type: "integer"
+          description: "Unique identifier for features"
+      
+
+
+
   parameters:
     TrailId:
       name: "TrailId"
@@ -133,6 +161,16 @@ components:
       required: true
       schema:
         type: "integer"
+
+    FeaturesId:
+      name: "FeaturesId"
+      description: "ID of the feature to get"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+    
+    
 
 paths:
   /trails:
@@ -198,3 +236,106 @@ paths:
       responses:
         "204":
           description: "Successfully deleted a Trail"
+
+  /features:
+    get:
+      operationId: "features.read_all"
+      tags:
+        - "Features"
+      summary: "Read the list of features"
+      responses:
+        "200":
+          description: "Successfully read features list"
+    post: 
+      operationId: "features.create"
+      tags:
+        - "Features"
+      summary: "Create a Feature"
+      requestBody:
+        description: "Feature to create"
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: "features"
+              $ref: "#/components/schemas/Features"
+      responses:
+        "201":
+          description: "Successfully created Feature"
+
+  /features/{FeaturesId}:
+    get:
+      operationId: "features.read_one"
+      tags: 
+        - "Features"
+      summary: "Read one feature"
+      parameters:
+        - $ref: "#/components/parameters/FeaturesId"
+      responses: 
+        "200":
+          description: "Successfully read a feature"
+    delete:
+      operationId: "features.delete"
+      tags:
+        - "Features"
+      summary: "Delete a feature"
+      parameters: 
+        - $ref: "#/components/parameters/FeaturesId"
+      responses: 
+        "200":
+          description: "Successfully delete a feature"
+    put: 
+      operationId: "features.update"
+      tags: 
+        - "Features"
+      summary: "Update a feature"
+      parameters: 
+        - $ref: "#/components/parameters/FeaturesId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "features"
+              $ref: "#/components/schemas/Features"
+      responses:
+        "200":
+          description: "Successfully updated Feature"
+
+  /trails/{TrailId}/features:
+    get:
+      operationId: "trail_features.read_all"
+      tags:
+        - "Trail Features"
+      summary: "Read all features for a specific trail"
+      parameters:
+        - $ref: "#/components/parameters/TrailId"
+      responses:
+        "200":
+          description: "Succsesfully read all features for the trail"
+  /trails/{TrailId}/features/{FeaturesId}:
+    post:
+      operationId: "trail_features.create"
+      tags:
+        - "Trail Features"
+      summary: "Add a feature to a trail"
+      parameters:
+        - $ref: "#/components/parameters/TrailId"
+        - $ref: "#/components/parameters/FeaturesId"
+      responses:
+        "201":
+          description: "Successfully added a feature to a trail"
+    delete:
+      operationId: "trail_features.delete"
+      tags:
+        - "Trail Features"
+      summary: "Delete a feature from a trail"
+      parameters:
+        - $ref: "#/components/parameters/TrailId"
+        - $ref: "#/components/parameters/FeaturesId"
+      responses:
+        "200":
+          description: "Successfully deleted a feature from a trail"
+
+
+        
+
