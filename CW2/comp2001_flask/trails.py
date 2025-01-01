@@ -1,23 +1,24 @@
+#trails.py 
 from flask import abort, make_response
 from config import db
-from models import Trail, trails_schema, trail_schema
+from models import Trail, trails_schema, trail_schema, User
 
 
 # Function to read all trails
 def read_all():
     trails = Trail.query.all()
+    trails = Trail.query.all()
     return trails_schema.dump(trails)
 
 # Function to read one trail
 def read_one(TrailId):
+     
     trail = Trail.query.filter(Trail.TrailId == TrailId).one_or_none()
     
     if trail is not None:
         return trail_schema.dump(trail)
     else:
-        abort(
-            404, f"Trail with ID {TrailID} not found"
-            )
+        abort(404, f"Trail with ID {TrailID} not found")
 
 # Function to update a trail
 def update(TrailId, trail):

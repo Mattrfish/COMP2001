@@ -2,6 +2,24 @@ import pytz
 from config import db, ma
 from marshmallow import fields
 
+class User(db.Model):
+    __tablename__ = "User"
+    __table_args__ = {'schema': 'CW2'}
+
+    UserID = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    EmailAddress = db.Column(db.String(100), nullable=False)
+    Role = db.Column(db.String(6), nullable=False)
+
+class UserSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+        load_instance = True
+        sqla_session = db.session
+
+
+user_schema = UserSchema()
+
+
 class TrailFeature(db.Model):
     __tablename__ = "TrailFeatures"
     __table_args__ = {'schema': 'CW2'}

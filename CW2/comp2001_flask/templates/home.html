@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>RP Flask REST API - Trails</title>
+    <title>RP Flask REST API - Trails Microservice </title>
 </head>
 <body>
-    <h1>Trail Information</h1>
+    		<h1>Trail Information</h1>
 
     <ul>
         {% for trail in trails %}
@@ -20,13 +20,33 @@
                 <p><strong>Route Type:</strong> {{ trail.RouteType }}</p>
                 <p><strong>Owner ID:</strong> {{ trail.OwnerID }}</p>
 
+                <!-- Trail Location Points -->
+                <h3>Location Points:</h3>
+                <ul>
+                    {% if trail.Pt1_Lat and trail.Pt1_Long %}
+                        <li><strong>Point 1:</strong> Lat: {{ trail.Pt1_Lat }}, Long: {{ trail.Pt1_Long }} - {{ trail.Pt1_Desc }}</li>
+                    {% endif %}
+                    {% if trail.Pt2_Lat and trail.Pt2_Long %}
+                        <li><strong>Point 2:</strong> Lat: {{ trail.Pt2_Lat }}, Long: {{ trail.Pt2_Long }} - {{ trail.Pt2_Desc }}</li>
+                    {% endif %}
+                    {% if trail.Pt3_Lat and trail.Pt3_Long %}
+                        <li><strong>Point 3:</strong> Lat: {{ trail.Pt3_Lat }}, Long: {{ trail.Pt3_Long }} - {{ trail.Pt3_Desc }}</li>
+                    {% endif %}
+                    {% if trail.Pt4_Lat and trail.Pt4_Long %}
+                        <li><strong>Point 4:</strong> Lat: {{ trail.Pt4_Lat }}, Long: {{ trail.Pt4_Long }} - {{ trail.Pt4_Desc }}</li>
+                    {% endif %}
+                    {% if trail.Pt5_Lat and trail.Pt5_Long %}
+                        <li><strong>Point 5:</strong> Lat: {{ trail.Pt5_Lat }}, Long: {{ trail.Pt5_Long }} - {{ trail.Pt5_Desc }}</li>
+                    {% endif %}
+                </ul>
+
                 <!-- Trail Features -->
                 <h3>Features:</h3>
                 <ul>
                     {% for feature in trail.trail_features %}
                         <li>
-                            <p><strong>Feature ID:</strong> {{ feature.FeaturesId }}</p>
-                            <p><strong>Feature Name:</strong> {{ feature.feature.Feature }}</p>
+                            <p><strong>Feature ID:</strong> {{ feature.FeaturesId }}, 
+                            <strong>Feature Name:</strong> {{ feature.feature.Feature }}</p>
                         </li>
                     {% endfor %}
                 </ul>

@@ -149,9 +149,6 @@ components:
         FeaturesId:
           type: "integer"
           description: "Unique identifier for features"
-      
-
-
 
   parameters:
     TrailId:
@@ -168,11 +165,9 @@ components:
       in: path
       required: true
       schema:
-        type: "integer"
-    
-    
+        type: "integer" 
 
-paths:
+paths: 
   /trails:
     get:
       operationId: "trails.read_all"
