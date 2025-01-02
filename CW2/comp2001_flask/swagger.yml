@@ -169,6 +169,14 @@ components:
       schema:
         type: "integer" 
 
+    Auth:
+      name: auth
+      in: query
+      description: "JWT token for authorization"
+      required: true
+      schema:
+        type: string
+
   
 
 paths: 
@@ -179,12 +187,7 @@ paths:
         - "Trails"
       summary: "Read the list of trails"
       parameters:
-        - name: auth
-          in: query
-          description: "JWT token for authorization"
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/Auth"
       responses:
         "200":
           description: "Successfully read trail list"
@@ -194,12 +197,7 @@ paths:
         - "Trails"
       summary: "Create a Trail"
       parameters:
-        - name: auth
-          in: query
-          description: "JWT token for authorization"
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/Auth"
       requestBody:
         description: "Trail to create"
         required: true
@@ -220,12 +218,7 @@ paths:
       summary: "Read one Trail"
       parameters:
         - $ref: "#/components/parameters/TrailId"
-        - name: auth
-          in: query
-          description: "JWT token for authorization"
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/Auth"
       responses:
         "200":
           description: "Successfully read Trail"
@@ -236,12 +229,7 @@ paths:
       summary: "Update a trail"
       parameters:
         - $ref: "#/components/parameters/TrailId"
-        - name: auth
-          in: query
-          description: "JWT token for authorization"
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/Auth"
       requestBody:
         content:
           application/json:
@@ -258,12 +246,7 @@ paths:
       summary: "Delete a trail"
       parameters: 
         - $ref: "#/components/parameters/TrailId"
-        - name: auth
-          in: query
-          description: "JWT token for authorization"
-          required: true
-          schema:
-            type: string
+        - $ref: "#/components/parameters/Auth"
       responses:
         "204":
           description: "Successfully deleted a Trail"
@@ -274,6 +257,8 @@ paths:
       tags:
         - "Features"
       summary: "Read the list of features"
+      parameters:
+        - $ref: "#/components/parameters/Auth"
       responses:
         "200":
           description: "Successfully read features list"
@@ -282,6 +267,8 @@ paths:
       tags:
         - "Features"
       summary: "Create a Feature"
+      parameters:
+        - $ref: "#/components/parameters/Auth"
       requestBody:
         description: "Feature to create"
         required: true
@@ -302,6 +289,7 @@ paths:
       summary: "Read one feature"
       parameters:
         - $ref: "#/components/parameters/FeaturesId"
+        - $ref: "#/components/parameters/Auth"
       responses: 
         "200":
           description: "Successfully read a feature"
@@ -312,6 +300,7 @@ paths:
       summary: "Delete a feature"
       parameters: 
         - $ref: "#/components/parameters/FeaturesId"
+        - $ref: "#/components/parameters/Auth"
       responses: 
         "200":
           description: "Successfully delete a feature"
@@ -322,6 +311,7 @@ paths:
       summary: "Update a feature"
       parameters: 
         - $ref: "#/components/parameters/FeaturesId"
+        - $ref: "#/components/parameters/Auth"
       requestBody:
         content:
           application/json:
@@ -340,6 +330,7 @@ paths:
       summary: "Read all features for a specific trail"
       parameters:
         - $ref: "#/components/parameters/TrailId"
+        - $ref: "#/components/parameters/Auth"
       responses:
         "200":
           description: "Succsesfully read all features for the trail"
@@ -352,6 +343,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/TrailId"
         - $ref: "#/components/parameters/FeaturesId"
+        - $ref: "#/components/parameters/Auth"
       responses:
         "201":
           description: "Successfully added a feature to a trail"
@@ -363,6 +355,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/TrailId"
         - $ref: "#/components/parameters/FeaturesId"
+        - $ref: "#/components/parameters/Auth"
       responses:
         "200":
           description: "Successfully deleted a feature from a trail"

@@ -1,12 +1,42 @@
 #TrailFeatures
 
-from flask import abort, make_response
+from flask import abort, make_response, jsonify, request
 from config import db
-from models import Features, features_schema, feature_schema, Trail, trails_schema, trail_schema, TrailFeature, trailFeature_schema 
-
+from models import Features, features_schema, feature_schema, Trail, trails_schema, trail_schema, TrailFeature, trailFeature_schema, User
+import json
+from flask_jwt_extended import jwt_required, decode_token
 
 # add a feature to a trail
 def create(TrailId, FeaturesId):
+     # Extract token from query parameter
+    token = request.args.get("auth")
+    if not token:
+        return jsonify({"message": "Authorization token required"}), 401
+
+    try:
+        # Decode the token manually
+        decoded_token = decode_token(token)
+        identity = decoded_token.get("sub")  # Extract 'sub' field (user details)
+        if not identity:
+            return jsonify({"message": "Invalid token"}), 401
+
+        # Parse the 'sub' field as a dictionary
+        user_data = json.loads(identity)
+        user_id = user_data.get("id")  # Extract the UserID
+        role = user_data.get("role")  # Extract the role
+
+        # Verify user exists in the database
+        user = User.query.filter_by(UserID=user_id).first()
+        if not user:
+            return jsonify({"message": "User not found"}), 404
+
+         # Check if the user has admin role
+        if role != "admin":
+            return jsonify({"message": "Admin access required"}), 403
+
+    except Exception as e:
+        return jsonify({"message": f"Token decoding error: {str(e)}"}), 401
+
     trail = Trail.query.get(TrailId)
     if not trail:
         abort(404, f"Trail with id {TrailId} not found")
@@ -30,6 +60,31 @@ def create(TrailId, FeaturesId):
 
 # readall features of a specific trail
 def read_all(TrailId):
+     # Extract token from query parameter
+    token = request.args.get("auth")
+    if not token:
+        return jsonify({"message": "Authorization token required"}), 401
+
+    try:
+        # Decode the token manually
+        decoded_token = decode_token(token)
+        identity = decoded_token.get("sub")  # Extract 'sub' field (user details)
+        if not identity:
+            return jsonify({"message": "Invalid token"}), 401
+
+        # Parse the 'sub' field as a dictionary
+        user_data = json.loads(identity)
+        user_id = user_data.get("id")  # Extract the UserID
+        role = user_data.get("role")  # Extract the role
+
+        # Verify user exists in the database
+        user = User.query.filter_by(UserID=user_id).first()
+        if not user:
+            return jsonify({"message": "User not found"}), 404
+
+    except Exception as e:
+        return jsonify({"message": f"Token decoding error: {str(e)}"}), 401
+
     trail = Trail.query.get(TrailId)
     if not trail:
         abort(404, f"Trail with id {TrailId} not found")
@@ -40,6 +95,36 @@ def read_all(TrailId):
 
 # delete a feature from a specific trail
 def delete(TrailId, FeaturesId):
+     # Extract token from query parameter
+    token = request.args.get("auth")
+    if not token:
+        return jsonify({"message": "Authorization token required"}), 401
+
+    try:
+        # Decode the token manually
+        decoded_token = decode_token(token)
+        identity = decoded_token.get("sub")  # Extract 'sub' field (user details)
+        if not identity:
+            return jsonify({"message": "Invalid token"}), 401
+
+        # Parse the 'sub' field as a dictionary
+        user_data = json.loads(identity)
+        user_id = user_data.get("id")  # Extract the UserID
+        role = user_data.get("role")  # Extract the role
+
+        # Verify user exists in the database
+        user = User.query.filter_by(UserID=user_id).first()
+        if not user:
+            return jsonify({"message": "User not found"}), 404
+
+         # Check if the user has admin role
+        if role != "admin":
+            return jsonify({"message": "Admin access required"}), 403
+
+    except Exception as e:
+        return jsonify({"message": f"Token decoding error: {str(e)}"}), 401
+
+
     existing_trail = Trail.query.get(TrailId)
     if not existing_trail:
         abort(404, f"Trail with id {TrailId} not found")

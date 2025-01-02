@@ -2,7 +2,6 @@
 from flask import Flask, request, jsonify, redirect, render_template, json
 from flask_jwt_extended import JWTManager, create_access_token
 import config, requests
-from utils import role_required
 from models import Trail, Features, User
 from config import db
 

@@ -2,7 +2,6 @@ from flask import abort, jsonify, request
 from flask_jwt_extended import jwt_required, decode_token
 from config import db
 from models import Trail, trails_schema, trail_schema, User
-from utils import role_required
 import json
 
 
