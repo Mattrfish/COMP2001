@@ -150,6 +150,8 @@ components:
           type: "integer"
           description: "Unique identifier for features"
 
+  
+
   parameters:
     TrailId:
       name: "TrailId"
@@ -167,6 +169,8 @@ components:
       schema:
         type: "integer" 
 
+  
+
 paths: 
   /trails:
     get:
@@ -174,6 +178,13 @@ paths:
       tags:
         - "Trails"
       summary: "Read the list of trails"
+      parameters:
+        - name: auth
+          in: query
+          description: "JWT token for authorization"
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: "Successfully read trail list"
@@ -182,6 +193,13 @@ paths:
       tags:
         - "Trails"
       summary: "Create a Trail"
+      parameters:
+        - name: auth
+          in: query
+          description: "JWT token for authorization"
+          required: true
+          schema:
+            type: string
       requestBody:
         description: "Trail to create"
         required: true
@@ -202,6 +220,12 @@ paths:
       summary: "Read one Trail"
       parameters:
         - $ref: "#/components/parameters/TrailId"
+        - name: auth
+          in: query
+          description: "JWT token for authorization"
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: "Successfully read Trail"
@@ -212,6 +236,12 @@ paths:
       summary: "Update a trail"
       parameters:
         - $ref: "#/components/parameters/TrailId"
+        - name: auth
+          in: query
+          description: "JWT token for authorization"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -228,6 +258,12 @@ paths:
       summary: "Delete a trail"
       parameters: 
         - $ref: "#/components/parameters/TrailId"
+        - name: auth
+          in: query
+          description: "JWT token for authorization"
+          required: true
+          schema:
+            type: string
       responses:
         "204":
           description: "Successfully deleted a Trail"

@@ -3,7 +3,7 @@ from config import db, ma
 from marshmallow import fields
 
 class User(db.Model):
-    __tablename__ = "User"
+    __tablename__ = "Users"
     __table_args__ = {'schema': 'CW2'}
 
     UserID = db.Column(db.Integer, primary_key=True, autoincrement=True)
