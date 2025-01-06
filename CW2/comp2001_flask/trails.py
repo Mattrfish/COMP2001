@@ -32,7 +32,7 @@ def read_all():
     except Exception as e:
         return jsonify({"message": f"Token decoding error: {str(e)}"}), 401
 
-    # Fetch and return trails (assuming no role restrictions here)
+    # Fetch and return trails 
     trails = Trail.query.all()
     return trails_schema.dump(trails), 200
 
