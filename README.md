@@ -9,7 +9,7 @@ and database interaction.
 
 The service is deployed using Docker.
 Github: CW2/comp2001_flask
-Docker Image: mattrfush/2001_flask
+Docker Image: mattrfish/2001_flask
 
 Features: CRUD Operations, User Authentication, Trail Management, and RESTful Design.
 
